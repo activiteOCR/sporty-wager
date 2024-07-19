@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 // Components
-import React from 'react';
+import React from "react";
 import {
   useWallet,
   Wallet as SolanaWallet,
-} from '@solana/wallet-adapter-react';
+} from "@solana/wallet-adapter-react";
 
 // Layouts
 import {
@@ -17,27 +17,27 @@ import {
   Button,
   Box,
   useToast,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 // Icons
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon } from "@chakra-ui/icons";
 
 // Util
-import { truncatedPublicKey } from '@/util/helper';
-
+import { truncatedPublicKey } from "@/util/helper";
 
 const ConnectWalletButton = () => {
-  const { wallets, select, connected, publicKey, wallet, connect } = useWallet();
-  const toast = useToast()
+  const { wallets, select, connected, publicKey, wallet, connect } =
+    useWallet();
+  const toast = useToast();
 
   const copyPublicKey = () => {
-    navigator.clipboard.writeText(publicKey?.toBase58() || '');
-    toast({ status: "success", title: 'Copied Address' })
+    navigator.clipboard.writeText(publicKey?.toBase58() || "");
+    toast({ status: "success", title: "Copied Address" });
   };
 
   const onConnectWallet = async (wallet: SolanaWallet) => {
     try {
-      console.log('Connection event', wallet.readyState);
+      console.log("Connection event", wallet.readyState);
       select(wallet.adapter.name);
       await connect();
     } catch (e) {
@@ -50,7 +50,7 @@ const ConnectWalletButton = () => {
     <Menu>
       <MenuButton
         as={Button}
-        colorScheme='messenger'
+        colorScheme="purple"
         w="13rem"
         borderRadius="0.5rem"
         rightIcon={
@@ -61,7 +61,9 @@ const ConnectWalletButton = () => {
                 alt={`${wallet.adapter.name} Icon`}
               />
             </Box>
-          ) : <ChevronDownIcon color="white" w="1.5rem" h="1.5rem" />
+          ) : (
+            <ChevronDownIcon color="white" w="1.5rem" h="1.5rem" />
+          )
         }
       >
         {!connected && <Text fontSize="1.2rem">Connect Wallet</Text>}
@@ -73,15 +75,11 @@ const ConnectWalletButton = () => {
       </MenuButton>
 
       {connected && (
-        <MenuList
-          w="10rem"
-          p="0.5rem"
-          borderRadius="1rem"
-        >
-          <MenuItem
-            h="3rem"
-            onClick={copyPublicKey}>
-            <Text fontSize="1.2rem" color="blue.400" fontWeight={500}>Copy Address</Text>
+        <MenuList w="10rem" p="0.5rem" borderRadius="1rem">
+          <MenuItem h="3rem" onClick={copyPublicKey}>
+            <Text fontSize="1.2rem" color="purple.400" fontWeight={500}>
+              Copy Address
+            </Text>
           </MenuItem>
           <MenuItem
             h="3rem"
@@ -92,20 +90,15 @@ const ConnectWalletButton = () => {
               await wallet.adapter.disconnect();
             }}
           >
-            <Text fontSize="1.2rem" color="blue.400" fontWeight={500}>
+            <Text fontSize="1.2rem" color="purple.400" fontWeight={500}>
               Disconnect
             </Text>
           </MenuItem>
         </MenuList>
       )}
 
-
       {!connected && wallets && (
-        <MenuList
-          w="10rem"
-          p="0.5rem"
-          borderRadius="1rem"
-        >
+        <MenuList w="10rem" p="0.5rem" borderRadius="1rem">
           {wallets.map((wallet: SolanaWallet) => {
             return (
               <MenuItem
@@ -113,9 +106,9 @@ const ConnectWalletButton = () => {
                 h="3rem"
                 onClick={async () => {
                   try {
-                    onConnectWallet(wallet)
+                    onConnectWallet(wallet);
                   } catch (e: any) {
-                    console.log(e)
+                    console.log(e);
                   }
                 }}
               >
@@ -124,9 +117,7 @@ const ConnectWalletButton = () => {
                     <img
                       width={100}
                       loading="lazy"
-                      src={
-                        wallet.adapter.icon
-                      }
+                      src={wallet.adapter.icon}
                       alt={`${wallet.adapter.name} Icon`}
                     />
                   </Box>
@@ -148,4 +139,4 @@ const ConnectWalletButton = () => {
   );
 };
 
-export default ConnectWalletButton
+export default ConnectWalletButton;

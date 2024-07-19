@@ -1,8 +1,8 @@
-import { Wallet } from '@/contexts/walletContext'
-import '@/styles/globals.css'
-import { ChakraProvider } from '@chakra-ui/react'
-import type { AppProps } from 'next/app'
-import { theme } from '@/util/theme'
+import { Wallet } from "@/contexts/walletContext";
+import "@/styles/globals.css";
+import { ChakraProvider } from "@chakra-ui/react";
+import type { AppProps } from "next/app";
+import { theme } from "@/util/theme";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -11,5 +11,5 @@ export default function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </Wallet>
     </ChakraProvider>
-  )
+  );
 }

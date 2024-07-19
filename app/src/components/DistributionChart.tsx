@@ -1,17 +1,15 @@
-import React from 'react';
-import { Doughnut } from 'react-chartjs-2';
-import 'chart.js/auto';
-import { Expense } from '@/types/expense';
-import { Flex, Text } from '@chakra-ui/react';
-
+import React from "react";
+import { Doughnut } from "react-chartjs-2";
+import "chart.js/auto";
+import { Expense } from "@/types/expense";
+import { Flex, Text } from "@chakra-ui/react";
 
 type Props = {
-  data?: { merchant: string, amount: number }[]
-}
+  data?: { merchant: string; amount: number }[];
+};
 export const DistributionChart = ({ data }: Props) => {
-
   if (!data) {
-    data = [{ merchant: "None", amount: 1 }]
+    data = [{ merchant: "None", amount: 1 }];
   }
   const merchants: string[] = [];
   const amounts: number[] = [];
@@ -26,30 +24,29 @@ export const DistributionChart = ({ data }: Props) => {
     }
   });
 
-
   const dataEntry = {
     labels: merchants,
-    datasets: [{
-      data: amounts,
-      backgroundColor: [
-        "#2DB3FF",
-        "#2DFF42",
-        "#FFD12D",
-        "#FF2D2D",
-        "#FF2DF7"
-      ],
-      // hoverBackgroundColor: "#7eb7ff"
-    }]
+    datasets: [
+      {
+        data: amounts,
+        backgroundColor: [
+          "#00FFA3",
+          "#03E1FF",
+          "#DC1FFF",
+          "#000000",
+          "#FF2DF7",
+        ],
+        // hoverBackgroundColor: "#7eb7ff"
+      },
+    ],
   };
 
   return (
     <Flex flexFlow="column" align="center" w="30%">
-      <Text color="gray.500" fontSize="1.5rem">Distribution of expenses</Text>
-      <Doughnut
-        data={dataEntry}
-        width={200}
-        height={200}
-      />
+      <Text color="gray.500" fontSize="1.5rem">
+        Shaker distribution
+      </Text>
+      <Doughnut data={dataEntry} width={200} height={200} />
     </Flex>
-  )
-}
+  );
+};
