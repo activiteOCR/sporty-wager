@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { MyExpenses } from "@/components/MyExpenses";
 import { DefaultHead } from "@/components/DefaultHead";
-import Gallery from "@/components/Gallery"; // Import du nouveau composant Gallery
+import Gallery from "@/components/Gallery";
 import { Swap } from "@/components/Swap";
 
 // Définir les images à passer à Gallery
@@ -33,7 +33,7 @@ export default function Home() {
     <>
       <DefaultHead />
       <Navbar />
-      <Gallery images={images} /> {/* Ajout du composant Gallery */}
+      <Gallery images={images} />
       <Swap />
       <MyExpenses images={images} />
     </>

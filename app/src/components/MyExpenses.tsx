@@ -13,8 +13,9 @@ import {
   useDisclosure,
   Text,
   useToast,
+  Center,
 } from "@chakra-ui/react";
-import { EditIcon, DeleteIcon, AddIcon, LinkIcon } from "@chakra-ui/icons";
+import { EditIcon, DeleteIcon, AddIcon } from "@chakra-ui/icons";
 import { AddItem } from "./AddItem";
 import { getExpenses } from "@/util/program/getExpenses";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
@@ -83,6 +84,7 @@ export const MyExpenses = ({ images }: MyExpensesProps) => {
       pubKey: expense.pubKey,
       amount: expense.amount,
       merchant: expense.merchant,
+      prediction: expense.prediction, // Include prediction
     });
 
     onOpen2();
@@ -137,6 +139,14 @@ export const MyExpenses = ({ images }: MyExpensesProps) => {
                     color="white"
                     fontWeight={400}
                   >
+                    Prediction
+                  </Th>
+                  <Th
+                    sx={{ textTransform: "none" }}
+                    fontSize="1.4rem"
+                    color="white"
+                    fontWeight={400}
+                  >
                     Amount
                   </Th>
                   <Th
@@ -167,10 +177,11 @@ export const MyExpenses = ({ images }: MyExpensesProps) => {
                       fontWeight={500}
                     >
                       <Td>{expense.merchant}</Td>
+                      <Td>{expense.prediction}</Td> {/* Display prediction */}
                       <Td>${expense.amount}</Td>
                       <Td>{truncatedPublicKey(expense.pubKey)}</Td>
                       <Td>
-                        <IconButton
+                        {/* <IconButton
                           h="2rem"
                           w="2rem"
                           mr="10px"
@@ -181,20 +192,22 @@ export const MyExpenses = ({ images }: MyExpensesProps) => {
                           }
                           aria-label="Update Expense"
                           onClick={() => handleUpdate(expense)}
-                        />
-                        <IconButton
-                          h="2rem"
-                          w="2rem"
-                          bg="red.100"
-                          icon={
-                            <DeleteIcon
-                              style={{ width: "1.5rem", height: "1.5rem" }}
-                              color="red"
-                            />
-                          }
-                          aria-label="Remove expense"
-                          onClick={async () => await handleRemove(expense.id)}
-                        />
+                        /> */}
+                        <Center>
+                          <IconButton
+                            h="2rem"
+                            w="2rem"
+                            bg="red.100"
+                            icon={
+                              <DeleteIcon
+                                style={{ width: "1.5rem", height: "1.5rem" }}
+                                color="red"
+                              />
+                            }
+                            aria-label="Remove expense"
+                            onClick={async () => await handleRemove(expense.id)}
+                          />
+                        </Center>
                       </Td>
                     </Tr>
                   ))
@@ -210,7 +223,7 @@ export const MyExpenses = ({ images }: MyExpensesProps) => {
               onClose={onClose}
               isOpen={isOpen}
               setExpenses={setExpenses}
-              images={images} // Pass the images array to AddItem
+              images={images}
             />
             {currentValues && (
               <UpdateItem

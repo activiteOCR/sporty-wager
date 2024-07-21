@@ -1,11 +1,12 @@
-import * as anchor from '@project-serum/anchor'
-import { anchorProgram } from '@/util/anchorProgram';
+import * as anchor from "@project-serum/anchor";
+import { anchorProgram } from "@/util/anchorProgram";
 
 export const updateExpense = async (
   wallet: anchor.Wallet,
   id: number,
   merchantName: string,
   amount: number,
+  prediction: string // New parameter for prediction
 ) => {
   const program = anchorProgram(wallet);
 
@@ -19,19 +20,21 @@ export const updateExpense = async (
   );
 
   try {
-    const sig = await program.methods.modifyExpense(
-      new anchor.BN(id),
-      merchantName,
-      new anchor.BN(amount)
-    ).accounts({
-      expenseAccount: expense_account,
-      authority: wallet.publicKey,
-    })
+    const sig = await program.methods
+      .modifyExpense(
+        new anchor.BN(id),
+        merchantName,
+        new anchor.BN(amount),
+        prediction // Include prediction in the method call
+      )
+      .accounts({
+        expenseAccount: expense_account,
+        authority: wallet.publicKey,
+      })
       .rpc();
-    return { sig, error: false }
+    return { sig, error: false };
   } catch (e: any) {
-    console.log(e)
-    return { sig: null, error: e.toString() }
+    console.log(e);
+    return { sig: null, error: e.toString() };
   }
-
-}
+};

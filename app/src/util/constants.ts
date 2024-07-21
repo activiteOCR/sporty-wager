@@ -3,9 +3,8 @@ export const DEVNET_RPC = "https://api.devnet.solana.com";
 // export const DEVNET_RPC =
 //   "https://neat-omniscient-choice.solana-mainnet.quiknode.pro/f60e54a8d341f820bc2f26fa585a0f124e566cd2/"; // CLement RPC For Mainnet
 //export const DEVNET_PROGRAM_ID = "4TRewAKHDepcShLNkAAc65i9gDYq5R3fKv3Fxt3ide4f";
-export const DEVNET_PROGRAM_ID = "CRrstAnx8VxnxbKA45VBDfuChSCuNNyqmNLXRiDXHTnu";
-
-//export const GITHUB_LINK = "https://github.com/gitbolt/solana-expense-tracker";
+//export const DEVNET_PROGRAM_ID = "CRrstAnx8VxnxbKA45VBDfuChSCuNNyqmNLXRiDXHTnu";
+export const DEVNET_PROGRAM_ID = "6jHCAwbMrxP8RoRyvRnEMuHDXi2gBM6RuUWvygRSEeok";
 
 export const TOKENS = [
   {

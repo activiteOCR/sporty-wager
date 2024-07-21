@@ -1,16 +1,15 @@
-import * as anchor from '@project-serum/anchor'
-import { anchorProgram } from '@/util/anchorProgram';
+import * as anchor from "@project-serum/anchor";
+import { anchorProgram } from "@/util/anchorProgram";
 
 export const createExpense = async (
   wallet: anchor.Wallet,
   merchantName: string,
   itemAmount: number,
+  prediction: string // New parameter for prediction
 ) => {
   const program = anchorProgram(wallet);
 
-
-
-  let id = +new Date()
+  let id = +new Date();
 
   let [expense_account] = anchor.web3.PublicKey.findProgramAddressSync(
     [
@@ -26,16 +25,18 @@ export const createExpense = async (
       .initializeExpense(
         new anchor.BN(id),
         merchantName,
-        new anchor.BN(itemAmount))
+        new anchor.BN(itemAmount),
+        prediction // Include prediction in the method call
+      )
       .accounts({
         expenseAccount: expense_account,
         authority: wallet.publicKey,
       })
       .rpc();
 
-    return { error: false, sig }
+    return { error: false, sig };
   } catch (e: any) {
-    console.log(e)
-    return { error: e.toString(), sig: null }
+    console.log(e);
+    return { error: e.toString(), sig: null };
   }
-}
+};
