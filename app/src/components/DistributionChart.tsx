@@ -42,11 +42,11 @@ export const DistributionChart = ({ data }: Props) => {
   };
 
   return (
-    <Flex flexFlow="column" align="center" w="30%">
-      <Text color="gray.500" fontSize="1.5rem">
-        Shaker distribution
+    <Flex flexFlow="column" align="center" w="23%">
+      <Text color="white" fontSize="1.3rem">
+        Wager distribution
       </Text>
-      <Doughnut data={dataEntry} width={200} height={200} />
+      <Doughnut data={dataEntry} width={400} height={400} />
     </Flex>
   );
 };

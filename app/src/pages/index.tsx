@@ -2,28 +2,29 @@ import { Navbar } from "@/components/Navbar";
 import { MyExpenses } from "@/components/MyExpenses";
 import { DefaultHead } from "@/components/DefaultHead";
 import Gallery from "@/components/Gallery"; // Import du nouveau composant Gallery
+import { Swap } from "@/components/Swap";
 
 // Définir les images à passer à Gallery
 const images = [
   {
-    src: "https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
-    title: "Image 1",
-    description: "Description for Image 1",
+    src: "https://i.postimg.cc/hjNL174N/NFL.webp",
+    title: "LION VS HAWKS",
+    description: "Odds: 1.65 | 3.2 | 2.81",
   },
   {
-    src: "https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
-    title: "Image 2",
-    description: "Description for Image 2",
+    src: "https://i.postimg.cc/W3KyqnDZ/NHL.webp",
+    title: "WOLVES VS EAGLES",
+    description: "Odds: 2.88 | 3.64 | 1.71",
   },
   {
-    src: "https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
-    title: "Image 3",
-    description: "Description for Image 3",
+    src: "https://i.postimg.cc/MpVz6nFt/MLB.webp",
+    title: "TIGERS VS SHARKS",
+    description: "Odds: 1.25 | 4.42 | 3.33",
   },
   {
-    src: "https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
-    title: "Image 4",
-    description: "Description for Image 4",
+    src: "https://i.postimg.cc/MH18W4sH/NBA.webp",
+    title: "CELTICS VS BULLS",
+    description: "Odds: 1.55 | 3.78 | 2.98",
   },
 ];
 
@@ -33,7 +34,8 @@ export default function Home() {
       <DefaultHead />
       <Navbar />
       <Gallery images={images} /> {/* Ajout du composant Gallery */}
-      <MyExpenses />
+      <Swap />
+      <MyExpenses images={images} />
     </>
   );
 }

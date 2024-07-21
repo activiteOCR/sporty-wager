@@ -1,12 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
-// Components
-import React from "react";
+// /* eslint-disable @next/next/no-img-element */
+// // Components
+import React, { useState, useEffect } from "react";
 import {
   useWallet,
   Wallet as SolanaWallet,
 } from "@solana/wallet-adapter-react";
-
-// Layouts
 import {
   Menu,
   MenuButton,
@@ -18,17 +16,36 @@ import {
   Box,
   useToast,
 } from "@chakra-ui/react";
-
-// Icons
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import { truncatedPublicKey, getSolanaBalance } from "@/util/helper";
 
-// Util
-import { truncatedPublicKey } from "@/util/helper";
+interface ConnectWalletButtonProps {
+  setPublicKey: (publicKey: string | null) => void;
+  setBalance: (balance: number | null) => void;
+}
 
-const ConnectWalletButton = () => {
+const ConnectWalletButton: React.FC<ConnectWalletButtonProps> = ({
+  setPublicKey,
+  setBalance,
+}) => {
   const { wallets, select, connected, publicKey, wallet, connect } =
     useWallet();
   const toast = useToast();
+  const [solanaBalance, setSolanaBalance] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (publicKey) {
+      getSolanaBalance(publicKey.toBase58()).then((balance) => {
+        setSolanaBalance(balance);
+        setBalance(balance);
+      });
+      setPublicKey(publicKey.toBase58());
+    } else {
+      setSolanaBalance(null);
+      setBalance(null);
+      setPublicKey(null);
+    }
+  }, [publicKey, setPublicKey, setBalance]);
 
   const copyPublicKey = () => {
     navigator.clipboard.writeText(publicKey?.toBase58() || "");
@@ -42,7 +59,6 @@ const ConnectWalletButton = () => {
       await connect();
     } catch (e) {
       console.log("Wallet Error: ", e);
-      // toast({ status: "info", title: 'A non-critical error occured. Try connecting again.' })
     }
   };
 

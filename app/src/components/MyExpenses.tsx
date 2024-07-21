@@ -24,10 +24,13 @@ import { Expense } from "@/types/expense";
 import { deleteExpense } from "@/util/program/deleteExpense";
 import { UpdateItem } from "./UpdateItem";
 import { DistributionChart } from "./DistributionChart";
-import { GITHUB_LINK } from "@/util/constants";
 import NoSRR from "react-no-ssr";
 
-export const MyExpenses = () => {
+interface MyExpensesProps {
+  images: { src: string; title: string; description: string }[];
+}
+
+export const MyExpenses = ({ images }: MyExpensesProps) => {
   const [expenses, setExpenses] = useState<Expense[]>([]);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -95,19 +98,16 @@ export const MyExpenses = () => {
     >
       <Flex flexFlow="column" gap="2rem">
         <Flex justify="space-between">
-          {/* <Button onClick={() => window.open(GITHUB_LINK)} w="8rem" leftIcon={<LinkIcon sx={{ mb: "4px" }} />} mt={4} colorScheme="messenger" fontSize="1.4rem" p="4px 0 0 0">
-            GitHub
-          </Button> */}
           <Button
             onClick={onOpen}
-            w="6rem"
+            w="14rem"
             leftIcon={<AddIcon sx={{ mb: "4px" }} />}
             mt={4}
             colorScheme="purple"
             fontSize="1.4rem"
             p="4px 0 0 0"
           >
-            Add
+            Add Prediction
           </Button>
         </Flex>
         <Box
@@ -115,7 +115,7 @@ export const MyExpenses = () => {
           p="2rem 1rem"
           boxShadow="0px 5px 20px #f1f1f5"
           border="1px solid"
-          borderColor="gray.100"
+          borderColor="purple.400"
           borderRadius="1rem"
           fontSize="2rem"
         >
@@ -126,15 +126,15 @@ export const MyExpenses = () => {
                   <Th
                     sx={{ textTransform: "none" }}
                     fontSize="1.4rem"
-                    color="gray.400"
+                    color="white"
                     fontWeight={400}
                   >
-                    Merchant
+                    Wager selection
                   </Th>
                   <Th
                     sx={{ textTransform: "none" }}
                     fontSize="1.4rem"
-                    color="gray.400"
+                    color="white"
                     fontWeight={400}
                   >
                     Amount
@@ -142,7 +142,7 @@ export const MyExpenses = () => {
                   <Th
                     sx={{ textTransform: "none" }}
                     fontSize="1.4rem"
-                    color="gray.400"
+                    color="white"
                     fontWeight={400}
                   >
                     Public Key
@@ -150,7 +150,7 @@ export const MyExpenses = () => {
                   <Th
                     sx={{ textTransform: "none" }}
                     fontSize="1.4rem"
-                    color="gray.400"
+                    color="white"
                     fontWeight={400}
                   >
                     Actions
@@ -163,7 +163,7 @@ export const MyExpenses = () => {
                     <Tr
                       key={expense.pubKey}
                       fontSize="1.4rem"
-                      color="gray.500"
+                      color="white"
                       fontWeight={500}
                     >
                       <Td>{expense.merchant}</Td>
@@ -210,6 +210,7 @@ export const MyExpenses = () => {
               onClose={onClose}
               isOpen={isOpen}
               setExpenses={setExpenses}
+              images={images} // Pass the images array to AddItem
             />
             {currentValues && (
               <UpdateItem

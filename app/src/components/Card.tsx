@@ -17,7 +17,7 @@ const Card: React.FC<CardProps> = ({ image, title, description }) => {
       p={4}
     >
       <Image src={image} alt={title} />
-      <Box p={4}>
+      <Box p={4} textAlign="center">
         <Text fontWeight="bold" fontSize="xl" mb={2}>
           {title}
         </Text>
