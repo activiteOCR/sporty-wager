@@ -1,3 +1,4 @@
 anchor-program/node_modules
 .DS_Store
+.env
 anchor-program/target
