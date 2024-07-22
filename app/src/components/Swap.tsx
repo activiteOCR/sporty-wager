@@ -90,7 +90,11 @@ export function Swap() {
         >
           {TOKENS.filter((token) => token.mintAddress !== token2).map(
             (token) => (
-              <option key={`token1-${token.name}`} value={token.mintAddress}>
+              <option
+                key={`token1-${token.name}`}
+                value={token.mintAddress}
+                style={{ backgroundColor: "black" }}
+              >
                 {token.name}
               </option>
             )
@@ -104,7 +108,11 @@ export function Swap() {
         >
           {TOKENS.filter((token) => token.mintAddress !== token1).map(
             (token) => (
-              <option key={`token2-${token.name}`} value={token.mintAddress}>
+              <option
+                key={`token2-${token.name}`}
+                value={token.mintAddress}
+                style={{ backgroundColor: "black" }}
+              >
                 {token.name}
               </option>
             )

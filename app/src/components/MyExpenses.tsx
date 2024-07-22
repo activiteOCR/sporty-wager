@@ -93,7 +93,7 @@ export const MyExpenses = ({ images }: MyExpensesProps) => {
   return (
     <Flex
       w="100%"
-      h="100vh"
+      h="80vh"
       align="start"
       mt="10rem"
       justifyContent="space-around"
