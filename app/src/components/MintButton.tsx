@@ -1,37 +1,60 @@
-import React, { useState, useCallback } from "react";
-import { Button, Input } from "@chakra-ui/react";
-import { mintNft } from "@/util/program/mint";
+// import React from "react";
+// import { Button } from "@chakra-ui/react";
+// import { useWallet } from "@solana/wallet-adapter-react";
+// import { mintNFT } from "../util/program/mint";
+
+// const MintButton: React.FC = () => {
+//   const wallet = useWallet();
+
+//   const handleMint = async () => {
+//     try {
+//       await mintNFT(wallet);
+//       alert("Minting completed successfully!");
+//     } catch (error) {
+//       console.error("Minting failed:", error);
+//       alert("Minting failed, check the console for errors.");
+//     }
+//   };
+
+//   return (
+//     <Button onClick={handleMint} colorScheme="purple" size="lg">
+//       Mint your prediction
+//     </Button>
+//   );
+// };
+
+// export default MintButton;
+
+import React from "react";
+import { Button, Flex } from "@chakra-ui/react";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { mintNFT } from "../util/program/mint";
 
 const MintButton: React.FC = () => {
-  const [imageFile, setImageFile] = useState<File | null>(null);
+  const wallet = useWallet();
 
-  const handleMint = useCallback(async () => {
-    if (!imageFile) {
-      alert("Please select an image file first.");
-      return;
-    }
+  const handleMint = async () => {
     try {
-      await mintNft(imageFile);
+      await mintNFT(wallet);
       alert("Minting completed successfully!");
     } catch (error) {
       console.error("Minting failed:", error);
       alert("Minting failed, check the console for errors.");
     }
-  }, [imageFile]);
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      setImageFile(event.target.files[0]);
-    }
   };
 
   return (
-    <>
-      <Input type="file" accept="image/*" onChange={handleFileChange} />
-      <Button onClick={handleMint} colorScheme="purple" size="lg">
-        Mint your NFT
+    <Flex justifyContent="center" alignItems="center" height="20vh">
+      <Button
+        onClick={handleMint}
+        colorScheme="purple"
+        size="lg"
+        fontSize="1.5rem"
+        padding="2rem 4rem"
+      >
+        Mint your prediction
       </Button>
-    </>
+    </Flex>
   );
 };
 
